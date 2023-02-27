@@ -9,7 +9,7 @@ export const handlers = [
             return res(
                 ctx.status(403),
                 ctx.json({
-                    errorMessage: 'Not authorized',
+                    errorMessage: 'Mock: Mock Fähler',
                 }),
             )
         }
@@ -17,7 +17,7 @@ export const handlers = [
         return res(
             ctx.status(200),
             ctx.json({
-                username: 'admin',
+                username: 'Mocki Freifrau von Mock',
             }),
         )
     }),

@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    let userName, isDirty = false
+    let userField, isDirty = false
 
     let promise = Promise.resolve([]);
     async function fetchUser() {
@@ -20,7 +20,7 @@
     })
     const setUser = () => {
         isDirty = true
-        if(userName === 'admin') {
+        if(userField === 'mocki') {
             sessionStorage.setItem("is-authenticated", true);
             promise = fetchUser();
         }
@@ -30,10 +30,10 @@
 <main>
     {#await promise}
         <p>...waiting</p>
-    {:then planets}
-        <pre>{JSON.stringify(planets, null, 2)}</pre>
+    {:then user}
+        <h1 title={user.username}>Willkommen, liebe {user.username}</h1>
     {:catch error}
-        <input bind:value={userName} type="text">
+        <input bind:value={userField} type="text">
         <button on:click={setUser}>Send</button>
         {#if isDirty}
             <p style="color: red">{error.message}</p>
@@ -43,3 +43,11 @@
 </main>
 
 
+<style>
+    h1 {
+        max-width: 700px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
