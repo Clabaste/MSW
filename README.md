@@ -1,12 +1,4 @@
-# Svelte + Vite
-
-This template should help get you started developing with Svelte in Vite.
-
-# Setup: Svelte + Vite
-
-This template should help get you started developing with Svelte in Vite.
-
-# Mock Service Worker
+# Setup: Mock Service Worker
 
 [https://mswjs.io/](https://mswjs.io/docs/getting-started/install)
 ```
