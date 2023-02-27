@@ -1,7 +1,7 @@
 import { rest } from 'msw'
 export const handlers = [
     // Handles a POST /login request
-    rest.get('/user', (req, res, ctx) => {
+    rest.get('user', (req, res, ctx) => {
         // Check if the user is authenticated in this session
         const isAuthenticated = sessionStorage.getItem('is-authenticated')
         if (!isAuthenticated) {

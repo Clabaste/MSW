@@ -2,17 +2,19 @@
     import { onMount } from "svelte";
 
     let promise = Promise.resolve([]);
-    async function fetchPlanets() {
-        const response = await self.fetch('https://www.swapi.tech/api/planets');
+    async function fetchUser() {
+        const response = await self.fetch('user');
 
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error(planets);
+            return response.json().then(text => {
+                throw new Error(text.errorMessage)
+            })
         }
     }
     onMount(() => {
-        promise = fetchPlanets();
+        promise = fetchUser();
     })
 </script>
 
