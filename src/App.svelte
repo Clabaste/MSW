@@ -18,12 +18,24 @@
     onMount(() => {
         promise = fetchUser();
     })
-    const setUser = () => {
-        isDirty = true
-        if(userField === 'mocki') {
+    const postUsername = async () => {
+        const response = await fetch('login', {
+            method: 'POST',
+            body: JSON.stringify({userName: userField})
+        })
+        if (response.ok) {
             sessionStorage.setItem("is-authenticated", true);
-            promise = fetchUser();
+            return response.json();
+        } else {
+            return response.json().then(text => {
+                throw new Error(text.errorMessage)
+            })
         }
+    }
+
+    const handleSetUser = () => {
+        isDirty=true
+        promise = postUsername()
     }
 </script>
 
@@ -34,7 +46,7 @@
         <h1 title={user.username}>Willkommen, liebe {user.username}</h1>
     {:catch error}
         <input bind:value={userField} type="text">
-        <button on:click={setUser}>Send</button>
+        <button on:click|preventDefault={handleSetUser}>Send</button>
         {#if isDirty}
             <p style="color: red">{error.message}</p>
         {/if}
